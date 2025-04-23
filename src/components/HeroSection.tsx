@@ -21,7 +21,7 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <div id="overlay"></div>
+              
               <Button className="px-6 py-3 rounded-lg bg-fancy-gradient-1 text-white font-medium hover:shadow-lg transition-all flex items-center justify-center">
                 Explore Services
                 <ArrowRight size={16} className="ml-2" />

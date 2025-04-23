@@ -15,7 +15,6 @@ import Cursor from "@/components/Cursor";
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Cursor />
       <Navbar />
       <main>
         <HeroSection />
