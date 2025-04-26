@@ -83,6 +83,9 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+#root::-webkit-scrollbar {
+  display: none;
+}
 #root {
   /* cursor: none; */
   cursor:unset;

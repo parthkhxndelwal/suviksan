@@ -1,13 +1,48 @@
-
 import { Facebook, Twitter, Linkedin, Instagram, ArrowRight } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
-const Footer = () => {
+const Footer = ({ className = "" }) => {
   const currentYear = new Date().getFullYear();
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer) return;
+
+    // Initially hide the footer
+    gsap.set(footer, { opacity: 0 });
+
+    // Create a mutation observer to detect when loader is complete
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class' && 
+            document.body.classList.contains('loader-complete')) {
+          
+          // Fade in the footer slightly later than the content
+          gsap.to(footer, {
+            opacity: 1,
+            duration: 0.8,
+            delay: 0.3
+          });
+          
+          observer.disconnect();
+        }
+      });
+    });
+    
+    // Start observing document body for the loader-complete class
+    observer.observe(document.body, { attributes: true });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   
   return (
-    <footer className="bg-gray-900 py-16 px-4 md:px-8 text-gray-300">
+    <footer ref={footerRef} className={`bg-gray-900 py-16 px-4 md:px-8 text-gray-300 ${className}`}>
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
